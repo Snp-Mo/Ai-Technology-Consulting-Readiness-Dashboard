@@ -11,6 +11,22 @@
 
 ---
 
+## SCOPE CHANGE LOG
+
+### Update — Week 2/3 (June 2026): Industry & Dataset Size Restructure
+
+The project scope has been revised from the original plan of **6 industries / 40-80 companies** to:
+
+- **5 sectors x 10 companies = 50 companies total**
+- **Sectors:** Healthcare/Biotech, Technology, Finance, Consulting, Government
+- **Rationale:** The team decided to scale down to fewer, higher-quality entries per sector for stronger evidence depth and consistency. Healthcare/Biotech (10 companies) was already complete at the time of this change and is retained as-is.
+- **Status:** Healthcare/Biotech = 10/10 complete. Technology, Finance, Consulting, and Government are in progress, target 10 each.
+- Government remains in the sector list "on probation" — if public-data evidence proves too thin during research, the team may substitute another sector (e.g., Retail/E-Commerce or Energy/Utilities) and will log that change here if it happens.
+
+The 6-category scoring model, 1-5 scale, and category weights (20/20/20/20/10/10) below are **unchanged** by this scope update.
+
+---
+
 ## 1. Purpose
 
 This framework defines how each company will be evaluated across six technology consulting categories using **publicly available information only**.
