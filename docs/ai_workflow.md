@@ -37,16 +37,14 @@ All outputs below use only the structured notes and scores from the spreadsheet.
 
 ### Technology — Microsoft
 
-**Summary:** Microsoft demonstrates very strong AI readiness, driven by its cloud-first strategy, Azure AI and Copilot investments, and the introduction of autonomous AI agents through Microsoft Scout. The company operates one of the largest cybersecurity ecosystems in the world, integrating threat detection, identity protection, and secure cloud infrastructure across Azure and Microsoft 365. Governance is mature, built around responsible AI principles, audit logs, and policy enforcement across its expanding AI portfolio. Automation opportunities are extensive across cloud services, productivity tools, and enterprise workflows, though implementation complexity varies with licensing, identity management, and endpoint readiness for autonomous agents.
-
-*(Data privacy research notes are not yet documented for Microsoft in the dataset — labeled Needs Review. No privacy claim is included above.)*
+**Summary:** Microsoft demonstrates very strong AI readiness, driven by its cloud-first strategy, Azure AI and Copilot investments, and the introduction of autonomous AI agents through Microsoft Scout. The company maintains a mature privacy and security program, backed by ISO 27018/27701 certifications, a Chief Privacy Officer and EU Data Protection Officer, and one of the largest cybersecurity ecosystems in the industry integrating threat detection and identity protection across Azure and Microsoft 365. Governance is mature, built around responsible AI principles, audit logs, and policy enforcement across its expanding AI portfolio. Automation opportunities are extensive across cloud services, productivity tools, and enterprise workflows, though implementation complexity varies with licensing, identity management, and endpoint readiness for autonomous agents.
 
 **Recommendations:**
 1. Expand automation in cloud operations and enterprise workflows, supported by the Automation Opportunity Score of 5.
 2. Reduce implementation complexity by aligning AI deployment across product teams, consistent with the Implementation Complexity Score of 3.
 3. Strengthen governance for responsible AI, aligned with the Governance Score of 5.
 
-**Grounding Check:** AI readiness, cybersecurity, governance, automation, and implementation complexity statements are grounded in the dataset notes. Data privacy notes are missing for Microsoft — flagged Needs Review, not treated as grounded. (Note: Microsoft's Privacy Score in the sheet is currently 4 despite no supporting notes — flagged separately for the data/scoring team to review once notes are added.)
+**Grounding Check:** All statements trace to Microsoft's notes. Data Privacy Notes were previously missing from the dataset — this has since been resolved: notes were added citing Microsoft's Trust Center Privacy Principles, ISO 27018/27701 certifications, EU Data Boundary, and Copilot data-training protections. The existing Privacy Score of 4 is now backed by evidence.
 
 ### Finance — JPMorgan Chase
 
@@ -83,12 +81,12 @@ All outputs below use only the structured notes and scores from the spreadsheet.
 
 ## 4. Revision Review
 
-Two issues were found during grounding checks and corrected before finalizing this document:
+Two issues were found during grounding checks and corrected:
 
-1. **Microsoft's summary contained an unsupported privacy claim** ("maintains strong privacy and security practices") with no corresponding Data Privacy Notes in the dataset. The claim was removed and replaced with an explicit Needs Review flag rather than fabricated content.
+1. **Microsoft's summary originally contained an unsupported privacy claim** ("maintains strong privacy and security practices") with no corresponding Data Privacy Notes in the dataset. The claim was first removed and flagged Needs Review. It has since been fully resolved: Data Privacy Notes were researched and added to the dataset from Microsoft's public Trust Center (Privacy Principles, ISO 27018/27701 certifications, EU Data Boundary, Copilot data-training protections), and the privacy claim was restored to the summary now that it is grounded in real evidence.
 2. **Score citations were inconsistent across companies.** Kaiser's recommendations cited actual score values; Microsoft, JPMorgan, Accenture, and DoD originally cited only the category name without the number. All four were updated to cite the real score values pulled directly from the dataset.
 
-**Result:** One unsupported claim corrected, one consistency gap fixed across four companies. All other statements confirmed grounded in the dataset notes. Microsoft's privacy status remains an open dataset gap (tracked separately) rather than a prompt-output problem.
+**Result:** One unsupported claim corrected and its underlying dataset gap closed; one consistency gap fixed across four companies. All statements across all 5 companies are now grounded in the dataset notes.
 
 ## 5. AI Tool Used
 
