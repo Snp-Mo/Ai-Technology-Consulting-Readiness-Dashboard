@@ -1,17 +1,14 @@
-import { useState } from 'react'
-import './App.css'
+import { Outlet } from "react-router-dom";
+import { DashboardProvider } from "./context/DashboardContext.jsx";
+import Sidebar from "./components/layout/Sidebar.jsx";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <div className="bg-blue-200 p-8">
-      <h1 className="text-3xl font-bold">Vite + React</h1>
-      <button onClick={() => setCount((count) => count + 1)}>
-        count is {count}
-      </button>
-    </div>
-  )
+    <DashboardProvider>
+      <Sidebar />
+      <main className="ml-[168px] min-h-screen px-8 py-7">
+        <Outlet />
+      </main>
+    </DashboardProvider>
+  );
 }
-
-export default App
