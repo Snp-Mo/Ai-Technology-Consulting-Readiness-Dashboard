@@ -1,12 +1,32 @@
 // Pure derivations over the company array from loadCompanies().
 
 export const CATEGORY_FIELDS = [
-  { field: "aiReadinessScore", label: "AI Readiness" },
-  { field: "privacyScore", label: "Privacy" },
-  { field: "cybersecurityScore", label: "Cybersecurity" },
-  { field: "governanceScore", label: "Governance" },
-  { field: "automationOpportunityScore", label: "Automation" },
-  { field: "implementationComplexityScore", label: "Complexity" },
+  {
+    field: "aiReadinessScore",
+    label: "AI Readiness",
+    notesField: "aiReadinessNotes",
+  },
+  { field: "privacyScore", label: "Privacy", notesField: "dataPrivacyNotes" },
+  {
+    field: "cybersecurityScore",
+    label: "Cybersecurity",
+    notesField: "cybersecurityNotes",
+  },
+  {
+    field: "governanceScore",
+    label: "Governance",
+    notesField: "governanceNotes",
+  },
+  {
+    field: "automationOpportunityScore",
+    label: "Automation",
+    notesField: "automationOpportunityNotes",
+  },
+  {
+    field: "implementationComplexityScore",
+    label: "Complexity",
+    notesField: "implementationComplexityNotes",
+  },
 ];
 
 export function mean(values) {
@@ -118,6 +138,36 @@ export function kpis(companies) {
     ).length,
     industries: new Set(companies.map((c) => c.industry)).size,
   };
+}
+
+/**
+ * Condense a long free-text Notes field to a single-sentence pull for the
+ * Deep Dive strength/watch cards. Returns null — so callers can show a
+ * "Needs review" fallback instead of a broken card — when the note is empty or
+ * looks source-truncated. Some cells start mid-word ("itedHealth…",
+ * "mplementation complexity…"); a clean note always opens with a capital or a
+ * digit, so a lowercase first character is a reliable truncation signal.
+ */
+export function noteHighlight(note, maxLen = 150) {
+  const text = (note ?? "").trim();
+  if (text === "" || /^[a-z]/.test(text)) return null;
+  const firstSentence = text.split(/(?<=[.!?])\s/)[0] ?? text;
+  if (firstSentence.length <= maxLen) return firstSentence;
+  return firstSentence.slice(0, maxLen).replace(/\s+\S*$/, "") + "…";
+}
+
+/**
+ * Per-category readiness read for one company: a strength when the 1–5 score
+ * is >= 4, a watch area when it is <= 3, each paired with a one-sentence pull
+ * from that category's Notes column (null when the note needs review).
+ */
+export function categoryHighlights(company) {
+  return CATEGORY_FIELDS.map(({ field, label, notesField }) => {
+    const value = company[field];
+    const kind =
+      value == null ? null : value >= 4 ? "strength" : value <= 3 ? "watch" : null;
+    return { field, label, value, kind, note: noteHighlight(company[notesField]) };
+  });
 }
 
 function parseCheckedDate(value) {

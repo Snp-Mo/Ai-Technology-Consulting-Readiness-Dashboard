@@ -23,6 +23,25 @@ export function IndustriesSkeleton() {
   );
 }
 
+/** Placeholder mirroring the Company Deep Dive layout while the CSV loads. */
+export function DeepDiveSkeleton() {
+  return (
+    <div role="status" aria-label="Loading dashboard data" className="space-y-5">
+      <Skeleton className="h-8 w-64" />
+      <Skeleton className="h-10 w-full max-w-md" />
+      <Skeleton className="h-28" />
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <Skeleton className="h-64" />
+        <Skeleton className="h-64" />
+      </div>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <Skeleton className="h-40" />
+        <Skeleton className="h-40" />
+      </div>
+    </div>
+  );
+}
+
 /** Placeholder mirroring the Executive Overview layout while the CSV loads. */
 export function OverviewSkeleton() {
   return (
