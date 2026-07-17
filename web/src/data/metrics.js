@@ -9,7 +9,7 @@ export const CATEGORY_FIELDS = [
   { field: "implementationComplexityScore", label: "Complexity" },
 ];
 
-function mean(values) {
+export function mean(values) {
   const nums = values.filter((v) => v != null);
   if (nums.length === 0) return null;
   return nums.reduce((a, b) => a + b, 0) / nums.length;
@@ -88,6 +88,23 @@ export function topCompanies(companies, n = 8) {
   return [...companies]
     .sort((a, b) => (b.score0to100 ?? 0) - (a.score0to100 ?? 0))
     .slice(0, n);
+}
+
+/** Per-industry rollup for the Industry Comparison summary cards. */
+export function industrySummaries(companies, industryOrder) {
+  return industryOrder
+    .filter((ind) => companies.some((c) => c.industry === ind))
+    .map((industry) => {
+      const group = companies.filter((c) => c.industry === industry);
+      const avg = mean(group.map((c) => c.score0to100));
+      return {
+        industry,
+        count: group.length,
+        avgScore100: avg == null ? null : Math.round(avg * 10) / 10,
+        highRisk: group.filter((c) => riskTier(c) === "high").length,
+        topCompany: topCompanies(group, 1)[0]?.companyName ?? null,
+      };
+    });
 }
 
 export function kpis(companies) {
