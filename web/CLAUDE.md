@@ -36,7 +36,14 @@ Routing in `src/main.jsx`; `src/App.jsx` = layout (fixed 168px sidebar + main). 
   - `StrengthsWatch.jsx` — two cards from `categoryHighlights(c)`: strengths (score ≥4, good accent) and watch areas (≤3, bad accent), each item showing the one-sentence `noteHighlight` pull or a **"Needs review — source note unavailable"** fallback when the pull is `null` (empty/truncated note). This is what gracefully handles Kaiser's empty cyber note and UnitedHealth's truncated governance note.
   - `AiNarrative.jsx` — AI Summary and AI Recommendation text cards (each with its own "Needs review" fallback when blank).
   - `SourceLinks.jsx` — the up-to-3 Source URLs, hostname label + external-link icon, `target="_blank" rel="noopener noreferrer"`, blank URLs skipped.
-- **STUBS still to build** (all render `StubPage.jsx`): GRC & Risk View (`/grc`), Recommendations (`/recommendations`). The CSV's long note/summary/recommendation text fields feed Deep Dive; Recommendations is their other natural home.
+- **GRC & Risk View (`/grc`, `src/pages/GrcRiskView.jsx`) — DONE.** Governance/risk/compliance posture across the filtered companies; excludes Implementation Complexity by design (blueprint's GRC spec). `metrics.js` gained `GRC_FIELDS` (the privacy/cyber/governance subset of `CATEGORY_FIELDS`) and `grcWatchSignals(companies)` (flattened watch-tier GRC highlights, each `{company, field, label, value, kind, note}`). Components in **`src/components/grc/`**:
+  - `GrcKpiRow.jsx` — Avg Privacy / Cybersecurity / Governance (each /5, colored by `scoreTier`), High-Risk Companies (`riskTier === "high"`, bad if >0), Needs-Review Signals (watch-tier GRC signals whose `note` is null, warn if >0).
+  - `RiskTierBreakdown.jsx` — horizontal bar of low/moderate/high counts in `TIER_COLORS`, direct count labels + tooltip.
+  - `GrcCategoryBars.jsx` — grouped bars of the 3 GRC category averages per industry (same pattern as `IndustryCategoryBars`), shares `IndustryLegend`.
+  - `RiskTable.jsx` — top-10 companies by `grcRiskIndex` desc: rank, company, industry badge, risk index (mono), riskTier badge; "Top 10 of N" caption when truncated.
+  - `RiskSignals.jsx` — feed of `grcWatchSignals` as compact sub-cards (company, category, score, `noteHighlight` pull or the "Needs review — source note unavailable" fallback — Kaiser's empty cyber note surfaces here).
+  `GrcSkeleton` added to `Skeleton.jsx`.
+- **STUB still to build** (renders `StubPage.jsx`): Recommendations (`/recommendations`). The CSV's long note/summary/recommendation text fields feed Deep Dive; Recommendations is their other natural home.
 
 ## Key decisions
 

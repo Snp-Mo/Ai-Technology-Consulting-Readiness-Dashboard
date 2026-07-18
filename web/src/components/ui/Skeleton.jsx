@@ -42,6 +42,26 @@ export function DeepDiveSkeleton() {
   );
 }
 
+/** Placeholder mirroring the GRC & Risk View layout while the CSV loads. */
+export function GrcSkeleton() {
+  return (
+    <div role="status" aria-label="Loading dashboard data" className="space-y-5">
+      <Skeleton className="h-8 w-64" />
+      <div className="grid grid-cols-5 gap-4">
+        {Array.from({ length: 5 }, (_, i) => (
+          <Skeleton key={i} className="h-24" />
+        ))}
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <Skeleton className="h-72" />
+        <Skeleton className="col-span-2 h-72" />
+      </div>
+      <Skeleton className="h-80" />
+      <Skeleton className="h-64" />
+    </div>
+  );
+}
+
 /** Placeholder mirroring the Executive Overview layout while the CSV loads. */
 export function OverviewSkeleton() {
   return (

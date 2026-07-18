@@ -29,6 +29,11 @@ export const CATEGORY_FIELDS = [
   },
 ];
 
+/** The three governance/risk/compliance categories the GRC page reads. */
+export const GRC_FIELDS = CATEGORY_FIELDS.filter(({ field }) =>
+  ["privacyScore", "cybersecurityScore", "governanceScore"].includes(field),
+);
+
 export function mean(values) {
   const nums = values.filter((v) => v != null);
   if (nums.length === 0) return null;
@@ -168,6 +173,20 @@ export function categoryHighlights(company) {
       value == null ? null : value >= 4 ? "strength" : value <= 3 ? "watch" : null;
     return { field, label, value, kind, note: noteHighlight(company[notesField]) };
   });
+}
+
+/**
+ * Watch-tier privacy/cybersecurity/governance highlights across companies,
+ * flattened for the GRC risk-signals feed. Each entry keeps its company plus
+ * the categoryHighlights shape ({field, label, value, kind, note}).
+ */
+export function grcWatchSignals(companies) {
+  const grcFieldNames = new Set(GRC_FIELDS.map((f) => f.field));
+  return companies.flatMap((company) =>
+    categoryHighlights(company)
+      .filter((h) => h.kind === "watch" && grcFieldNames.has(h.field))
+      .map((h) => ({ company, ...h })),
+  );
 }
 
 function parseCheckedDate(value) {
