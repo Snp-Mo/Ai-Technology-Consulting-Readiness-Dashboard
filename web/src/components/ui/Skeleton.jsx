@@ -62,6 +62,26 @@ export function GrcSkeleton() {
   );
 }
 
+/** Placeholder mirroring the Recommendations layout while the CSV loads. */
+export function RecommendationsSkeleton() {
+  return (
+    <div role="status" aria-label="Loading dashboard data" className="space-y-5">
+      <Skeleton className="h-8 w-64" />
+      <div className="grid grid-cols-3 gap-4">
+        {Array.from({ length: 3 }, (_, i) => (
+          <Skeleton key={i} className="h-24" />
+        ))}
+      </div>
+      <Skeleton className="h-80" />
+      <div className="grid grid-cols-2 gap-4">
+        <Skeleton className="h-48" />
+        <Skeleton className="h-48" />
+      </div>
+      <Skeleton className="h-96" />
+    </div>
+  );
+}
+
 /** Placeholder mirroring the Executive Overview layout while the CSV loads. */
 export function OverviewSkeleton() {
   return (

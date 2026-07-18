@@ -189,6 +189,34 @@ export function grcWatchSignals(companies) {
   );
 }
 
+/**
+ * True when the AI Output Review Status confirms the row's generated outputs
+ * were reviewed. The column is long free text, never a literal "Reviewed" —
+ * most rows say "…have been reviewed…", but six healthcare rows describe the
+ * company's own AI-review *process* instead ("Kaiser reviews AI outputs
+ * through…") and never state the row itself was reviewed, so a word-boundary
+ * "reviewed" match separates the two.
+ */
+export function isRecommendationReviewed(company) {
+  return /\breviewed\b/i.test(company.aiOutputReviewStatus ?? "");
+}
+
+/**
+ * Split the top automation-opportunity companies (score 5, matching the High
+ * Opportunity KPI rule) by implementation complexity. No company scores below
+ * 3 on complexity (dataset floor), so "quick wins" are the lowest band that
+ * actually exists: complexity <= 3. Everything else at opportunity 5 is a
+ * longer-term bet (complexity 4–5). Companies at opportunity 4 join neither
+ * list.
+ */
+export function recommendationPriorities(companies) {
+  const high = companies.filter((c) => c.automationOpportunityScore === 5);
+  return {
+    quickWins: high.filter((c) => (c.implementationComplexityScore ?? 6) <= 3),
+    longerTerm: high.filter((c) => (c.implementationComplexityScore ?? 0) >= 4),
+  };
+}
+
 function parseCheckedDate(value) {
   const m = /^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/.exec((value ?? "").trim());
   if (!m) return null;
